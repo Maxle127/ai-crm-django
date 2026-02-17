@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+Lead Detail
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=2" />
+{% endblock %}
+
+{% block content %}
+<div class="page">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="{% url 'dashboard'%}">Dashboard</a>
+            <span>/</span>
+            <a href="{% url 'leads'%}">Leads</a>
+            <span>/</span>
+            <span class="crumb-current">Client A</span>
+        </div>
+
+        <header class="page-header">
+            <a class="btn btn-ghost" href="/leads/">Back to Leads</a>
+            <div>
+                <h1 class="page-title"> Client A </h1>
+                <p class="page-subtitle"> Lead details and activity.</p>
+            </div>
+
+            <div class="page-actions">
+                <button class="btn btn-secondary" disabled> Edit </button>
+                <button class="btn btn-danger" disabled> Delete </button>
+            </div>
+        </header>
+
+        <section class="card">
+            <h2 class="section-title">Overview</h2>
+
+            <div class="kv">
+
+                <div class="kv-row">
+                    <span>Email</span>
+                    <span>example@gmail.com</span>
+                </div>
+
+                <div class="kv-row">
+                    <span>Phone</span>
+                    <span>+380 (00) 000-00-00</span>
+                </div>
+
+                <div class="kv-row">
+                    <span>Status</span>
+                    <span class="lead-status status-new">New</span>
+                </div>
+
+                <div class="kv-row">
+                    <span>Source</span>
+                    <span>Website</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="notes-head">
+                <h2 class="section-title">Notes</h2>
+                <button class="btn btn-primary" type="button">AI: Generate follow-up</button>
+            </div>
+
+            <div class="notes">
+                <div class="note">
+                    <div class="note-title">First contact</div>
+                    <div class="note-text">Called the Client and discussed the requirements.</div>
+                </div>
+
+                <div class="note">
+                    <div class="note-title">Next step</div>
+                    <div class="note-title">Send follow-up message with proposal.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

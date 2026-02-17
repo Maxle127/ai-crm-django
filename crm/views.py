@@ -4,8 +4,8 @@ async def dashbord(request):
     return render(request, "crm/index.html")
 
 async def leads(request):
-    pass
+    return render(request, "crm/leads.html")
 
-async def lead_detail(request, id=1):
-    pass
+async def lead_detail(request, id):
+    return render(request, "crm/lead-detail.html")
  

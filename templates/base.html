@@ -10,6 +10,16 @@
     {% block css_files %} {% endblock %}
 </head>
 <body>
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href= "{% url 'dashboard' %}"> AI CRM </a>
+
+            <div class="nav-links">
+                <a href="{%url 'dashboard'%}">Dashbord</a>
+                <a href="{%url 'leads'%}">Leads</a>
+            </div>
+        </div>
+    </nav>
     {% block content %}
     {% endblock %}
 </body>

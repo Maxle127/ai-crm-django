@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+All leads
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'crm/leads.css' %}?v=2" />
+{% endblock %}
+
+{% block content %}
+<section class="page">
+
+    <header class="page-header">
+        <div>
+            <h1 class="page-title">All leads</h1>
+            <p class="page-subtitle">A simple overview of your pipeline.</p>
+        </div>
+    </header>
+
+    <div class="leads-list">
+        {% include "crm/includes/lead-item.html"%}
+        {% include "crm/includes/lead-item.html"%}
+        {% include "crm/includes/lead-item.html"%}
+    </div>
+<section>
+
+{% endblock %}
