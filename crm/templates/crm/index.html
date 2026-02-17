@@ -1,9 +1,66 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block page_title %}
-    My CRM
+AI CRM Dashboard
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'crm/index.css' %}" />
 {% endblock %}
 
 {% block content %}
-    <h1>Welcome to CRM</h1>
+<div class="dashboard-container">
+    <h1 class="dashboard-title">AI CRM Dashboard</h1>
+    <p class="dashboard-subtitle">
+        Track your leads and manage your sales pipeline efficiently
+    </p>
+
+    <div class="stats-section">
+        <div class="stat-card">
+            <h3>Total Leads</h3>
+            <p>12</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>New</h3>
+            <p>3</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>In Progress</h3>
+            <p>5</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Closed</h3>
+            <p>4</p>
+        </div>
+    </div>
+
+    <div class="recent-section">
+        <div class="recent-section">
+            <h2>Recent Leads</h2>
+            <a class="recent-link" href="/leads/">View all</a>
+        </div>
+    </div>
+
+    <div class="recent-list">
+
+        <div class="lead-row">
+            <div class="lead-name">Client A</div>
+            <div class="lead-status status-new">New</div>
+        </div>
+
+        <div class="lead-row">
+            <div class="lead-name">Client B</div>
+                <div class="lead-status status-progress">Contacted</div>
+        </div>
+
+        <div class="lead-row">
+            <div class="lead-name">Client C</div>
+            <div class="lead-status status-won">Won</div>
+        </div>
+    </div>
+</div>
 {% endblock %}
