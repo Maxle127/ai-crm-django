@@ -20,9 +20,9 @@ All leads
     </header>
 
     <div class="leads-list">
-        {% include "crm/includes/lead-item.html"%}
-        {% include "crm/includes/lead-item.html"%}
-        {% include "crm/includes/lead-item.html"%}
+        {% for id, lead in leads.items %}
+            {% include "crm/includes/lead-item.html"%}
+        {% endfor %}
     </div>
 <section>
 

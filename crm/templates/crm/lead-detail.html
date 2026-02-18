@@ -17,13 +17,13 @@ Lead Detail
             <span>/</span>
             <a href="{% url 'leads'%}">Leads</a>
             <span>/</span>
-            <span class="crumb-current">Client A</span>
+            <span class="crumb-current">{{ lead.first_name }} {{ lead.last_name }}</span>
         </div>
 
         <header class="page-header">
             <a class="btn btn-ghost" href="/leads/">Back to Leads</a>
             <div>
-                <h1 class="page-title"> Client A </h1>
+                <h1 class="page-title"> {{ lead.first_name }} {{ lead.last_name }} </h1>
                 <p class="page-subtitle"> Lead details and activity.</p>
             </div>
 
@@ -40,22 +40,22 @@ Lead Detail
 
                 <div class="kv-row">
                     <span>Email</span>
-                    <span>example@gmail.com</span>
+                    <span>{{ lead.email }}</span>
                 </div>
 
                 <div class="kv-row">
                     <span>Phone</span>
-                    <span>+380 (00) 000-00-00</span>
+                    <span>{{ lead.phone }}</span>
                 </div>
 
                 <div class="kv-row">
                     <span>Status</span>
-                    <span class="lead-status status-new">New</span>
+                    <span class="lead-status status-new">{{ lead.status }}</span>
                 </div>
 
                 <div class="kv-row">
                     <span>Source</span>
-                    <span>Website</span>
+                    <span>{{ lead.source }}</span>
                 </div>
             </div>
         </section>

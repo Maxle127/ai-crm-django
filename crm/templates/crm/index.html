@@ -19,22 +19,22 @@ AI CRM Dashboard
     <div class="stats-section">
         <div class="stat-card">
             <h3>Total Leads</h3>
-            <p>12</p>
+            <p>{{ total }}</p>
         </div>
 
         <div class="stat-card">
             <h3>New</h3>
-            <p>3</p>
+            <p>{{ new_count }}</p>
         </div>
 
         <div class="stat-card">
             <h3>In Progress</h3>
-            <p>5</p>
+            <p>{{ contacted_count }}</p>
         </div>
 
         <div class="stat-card">
             <h3>Closed</h3>
-            <p>4</p>
+            <p>{{ won_count }}</p>
         </div>
     </div>
 
@@ -46,21 +46,12 @@ AI CRM Dashboard
     </div>
 
     <div class="recent-list">
-
-        <div class="lead-row">
-            <div class="lead-name">Client A</div>
-            <div class="lead-status status-new">New</div>
-        </div>
-
-        <div class="lead-row">
-            <div class="lead-name">Client B</div>
-                <div class="lead-status status-progress">Contacted</div>
-        </div>
-
-        <div class="lead-row">
-            <div class="lead-name">Client C</div>
-            <div class="lead-status status-won">Won</div>
-        </div>
+        {% for lead in leads %}
+            <div class="lead-row">
+                <div class="lead-name">{{ lead.first_name }} {{ lead.last_name }}</div>
+                <div class="lead-status status-new">{{ lead.status }}</div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
