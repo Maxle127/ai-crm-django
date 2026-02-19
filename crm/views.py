@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from datetime import datetime
 
@@ -70,5 +71,7 @@ async def leads(request):
 
 async def lead_detail(request, id):
     lead = LEADS.get(id)
+    if lead == None:
+        raise Http404()
     return render(request, "crm/lead-detail.html", {"lead": lead})
  
