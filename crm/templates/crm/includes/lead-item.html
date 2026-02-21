@@ -1,6 +1,6 @@
-<a class="lead-card" href="{% url 'lead-detail' id %}">
+<a class="lead-card" href="{% url 'lead-detail' lead.id %}">
     <div class="lead-main">
-        <div class="lead-name">{{ lead.first_name}} {{ lead.last_name}} </div>
+        <div class="lead-name">{{ lead.first_name }} {{ lead.last_name }} </div>
         <div class="lead-meta"> {{ lead.email }} | {{ lead.phone }}</div>
     </div>
 

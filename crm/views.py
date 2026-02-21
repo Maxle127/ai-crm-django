@@ -1,58 +1,18 @@
 from django.http import Http404
 from django.shortcuts import render
 from datetime import datetime
-
-LEADS = {
-    1 : {
-        "first_name": "Maksym",
-        "last_name": "Leiza",
-        "email": "maksimleiza@gmail.com",
-        "phone": "+380 (50) 621-68-97",
-        "status": "New",
-        "source": "Telegram",
-        "created_at": datetime(2026, 2, 18, 1, 30),
-    },
-    2: {
-        "first_name": "Veronika",
-        "last_name": "Grinda",
-        "email": "veronikagr@gmail.com",
-        "phone": "+380 (50) 000-00-00",
-        "status": "Contacted",
-        "source": "Instagram",
-        "created_at": datetime(2026, 2, 17, 2, 30),
-    },
-    3 : {
-        "first_name": "Sasha",
-        "last_name": "Bui",
-        "email": "sashabui@gmail.com",
-        "phone": "+380 (50) 123-45-67",
-        "status": "Won",
-        "source": "Website",
-        "created_at": datetime(2026, 2, 15, 19, 30),
-    },
-
-    4 : {
-        "first_name": "Zhenya",
-        "last_name": "Babinets",
-        "email": "zhenchy@gmail.com",
-        "phone": "+380 (67) 696-69-69",
-        "status": "Won",
-        "source": "Website",
-        "created_at": datetime(2026, 2, 15, 19, 45),
-    },
-}
+from .models import Lead
 
 def get_date(lead):
     return lead["created_at"]
 
-async def dashbord(request):
-    total = len(LEADS)
-    new_count = sum(1 for lead in LEADS.values() if lead["status"] == "New")
-    contacted_count = sum(1 for lead in LEADS.values() if lead["status"] == "Contacted")
-    won_count = sum(1 for lead in LEADS.values() if lead["status"] == "Won")
+def dashbord(request):
+    total = Lead.objects.count()
+    new_count = Lead.objects.filter(status="New").count()
+    contacted_count = Lead.objects.filter(status="Contacted").count()
+    won_count = Lead.objects.filter(status="Won").count()
 
-    sorted_leads = sorted(LEADS.values(), key=get_date, reverse=True)
-    latest_leads = sorted_leads[:3]
+    latest_leads = Lead.objects.order_by("-created_at")[:3]
 
     context = {
         "total": total,
@@ -63,14 +23,15 @@ async def dashbord(request):
     }
     return render(request, "crm/index.html", context)
 
-async def leads(request):
+def leads(request):
+    leads = Lead.objects.all()
     context = {
-        "leads": LEADS
+        "leads": leads
     }
     return render(request, "crm/leads.html", context)
 
-async def lead_detail(request, id):
-    lead = LEADS.get(id)
+def lead_detail(request, id):
+    lead = Lead.objects.get(id=id)
     if lead == None:
         raise Http404()
     return render(request, "crm/lead-detail.html", {"lead": lead})
