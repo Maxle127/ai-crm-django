@@ -1,83 +1,87 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block page_title %}
-Lead Detail
+  Lead Detail
 {% endblock %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=2" />
+  <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=3" />
 {% endblock %}
 
 {% block content %}
-<div class="page">
+  <div class="page">
     <div class="container">
-        <div class="breadcrumb">
-            <a href="{% url 'dashboard'%}">Dashboard</a>
-            <span>/</span>
-            <a href="{% url 'leads'%}">Leads</a>
-            <span>/</span>
-            <span class="crumb-current">{{ lead.first_name }} {{ lead.last_name }}</span>
+      <div class="breadcrumb">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <span>/</span>
+        <a href="{% url 'leads' %}">Leads</a>
+        <span>/</span>
+        <span class="crumb-current">{{ lead.first_name }} {{ lead.last_name }}</span>
+      </div>
+
+      <header class="page-header">
+        <a class="btn btn-ghost" href="/leads/">Back to Leads</a>
+        <div>
+          <h1 class="page-title">{{ lead.first_name }} {{ lead.last_name }}</h1>
+          <p class="page-subtitle">Lead details and activity.</p>
         </div>
 
-        <header class="page-header">
-            <a class="btn btn-ghost" href="/leads/">Back to Leads</a>
-            <div>
-                <h1 class="page-title"> {{ lead.first_name }} {{ lead.last_name }} </h1>
-                <p class="page-subtitle"> Lead details and activity.</p>
+        <div class="page-actions">
+          <button class="btn btn-secondary" disabled>Edit</button>
+          <button class="btn btn-danger" disabled>Delete</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2 class="section-title">Overview</h2>
+
+        <div class="kv">
+          <div class="kv-row">
+            <span>Email</span>
+            <span>{{ lead.email }}</span>
+          </div>
+
+          <div class="kv-row">
+            <span>Phone</span>
+            <span>{{ lead.phone }}</span>
+          </div>
+
+          <div class="kv-row">
+            <span>Status</span>
+            <span class="lead-status status-new">{{ lead.get_status_display }}</span>
+          </div>
+
+          <div class="kv-row">
+            <span>Source</span>
+            <span>{{ lead.get_source_display }}</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="notes-head">
+          <h2 class="section-title">Notes</h2>
+          <button class="btn btn-primary" type="button">AI: Generate follow-up</button>
+        </div>
+
+        <div class="notes">
+          {% for note in lead.notes.all %}
+            <div class="note">
+                <div class="note-text"> {{ note.note_text }} </div>
+                <div class="note-text"> {{ note.created_at|date:"d.m.Y H:i" }} </div>
             </div>
+            {% empty %}
+            <div class="note"> Нотаток поки немає... </div>
+          {% endfor %}
 
-            <div class="page-actions">
-                <button class="btn btn-secondary" disabled> Edit </button>
-                <button class="btn btn-danger" disabled> Delete </button>
-            </div>
-        </header>
-
-        <section class="card">
-            <h2 class="section-title">Overview</h2>
-
-            <div class="kv">
-
-                <div class="kv-row">
-                    <span>Email</span>
-                    <span>{{ lead.email }}</span>
-                </div>
-
-                <div class="kv-row">
-                    <span>Phone</span>
-                    <span>{{ lead.phone }}</span>
-                </div>
-
-                <div class="kv-row">
-                    <span>Status</span>
-                    <span class="lead-status status-new">{{ lead.status }}</span>
-                </div>
-
-                <div class="kv-row">
-                    <span>Source</span>
-                    <span>{{ lead.source }}</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="notes-head">
-                <h2 class="section-title">Notes</h2>
-                <button class="btn btn-primary" type="button">AI: Generate follow-up</button>
-            </div>
-
-            <div class="notes">
-                <div class="note">
-                    <div class="note-title">First contact</div>
-                    <div class="note-text">Called the Client and discussed the requirements.</div>
-                </div>
-
-                <div class="note">
-                    <div class="note-title">Next step</div>
-                    <div class="note-title">Send follow-up message with proposal.</div>
-                </div>
-            </div>
-        </section>
+          <form method="post" class="note-form">
+            {% csrf_token %}
+            <textarea name="note_text" rows="3" placeholder="Нова нотатка..." required></textarea>
+            <button class="btn btn-primary" type="submit">Додати нотатку</button>
+          </form>
+        </div>
+      </section>
     </div>
-</div>
+  </div>
 {% endblock %}

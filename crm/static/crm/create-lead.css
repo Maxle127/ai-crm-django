@@ -1,0 +1,160 @@
+.page{
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 28px 18px;
+}
+
+.page-header{
+  max-width: 720px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page-title{
+  margin: 0;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.page-subtitle{
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.create-wrap{
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.create-panel{
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 18px 55px rgba(0,0,0,.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.create-panel::before{
+  content:"";
+  position:absolute;
+  inset:-120px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, .18), transparent 42%),
+    radial-gradient(circle at 80% 30%, rgba(59, 130, 246, .18), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(34, 197, 94, .10), transparent 45%);
+  filter: blur(18px);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.create-panel > *{
+  position: relative;
+  z-index: 1;
+}
+
+.lead-form{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:16px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group label{
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color: rgba(255,255,255,.65);
+}
+
+.form-group input{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  color: white;
+  font-size:14px;
+  outline:none;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.form-group input::placeholder{
+  color: rgba(255,255,255,.4);
+}
+
+.form-group input:focus{
+  border-color: rgba(99, 102, 241, 0.35);
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.14);
+}
+
+/* КНОПКИ ЯК У ТВОЄМУ ДРУГОМУ CSS */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+  cursor: pointer;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.btn:active{
+  transform: translateY(0);
+}
+
+.btn-primary{
+  background: rgba(99, 102, 241, 0.22);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+@media (max-width: 640px){
+  .page-header{
+    margin-bottom: 18px;
+  }
+
+  .page-title{
+    font-size: 34px;
+  }
+
+  .form-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .create-panel{
+    padding: 20px;
+  }
+}
