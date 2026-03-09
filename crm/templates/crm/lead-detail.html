@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css_files %}
-  <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=3" />
+  <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=5" />
 {% endblock %}
 
 {% block content %}
@@ -28,8 +28,8 @@
         </div>
 
         <div class="page-actions">
-          <button class="btn btn-secondary" disabled>Edit</button>
-          <button class="btn btn-danger" disabled>Delete</button>
+          <a href="{% url 'update' lead.id %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'delete' lead.id %}" class="btn btn-primary">Delete</a>
         </div>
       </header>
 
@@ -68,11 +68,18 @@
         <div class="notes">
           {% for note in lead.notes.all %}
             <div class="note">
-                <div class="note-text"> {{ note.note_text }} </div>
-                <div class="note-text"> {{ note.created_at|date:"d.m.Y H:i" }} </div>
+              <div class="note-text">{{ note.note_text }}</div>
+              <div class="note-meta">
+                <div class="note-text">{{ note.created_at|date:'d.m.Y H:i' }}</div>
+                <form method="POST" class="note-delete-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="delete_note_id" value="{{ note.id }}" />
+                  <button class="note-delete" type="submit">Delete</button>
+                </form>
+              </div>
             </div>
-            {% empty %}
-            <div class="note"> Нотаток поки немає... </div>
+          {% empty %}
+            <div class="note">Нотаток поки немає...</div>
           {% endfor %}
 
           <form method="post" class="note-form">

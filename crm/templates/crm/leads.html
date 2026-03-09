@@ -6,7 +6,7 @@ All leads
 {% endblock %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'crm/leads.css' %}?v=2" />
+    <link rel="stylesheet" href="{% static 'crm/leads.css' %}?v=4" />
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@ All leads
         <div>
             <h1 class="page-title">All leads</h1>
             <p class="page-subtitle">A simple overview of your pipeline.</p>
+            <a href ="{% url 'create' %}"  class="create-btn"> Create Lead </a>
         </div>
     </header>
 

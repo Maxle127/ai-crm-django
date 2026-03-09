@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Delete Lead
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'crm/delete-lead.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">Delete Lead</h1>
+    </div>
+    <div class="delete-box">
+      <p class="delete-text">Are you sure you want to delete {{ lead.first_name }} {{ lead.last_name }}?</p>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="actions">
+          <button type="submit" class="btn btn-danger">Delete Lead</button>
+          <a href="{% url 'lead-detail' lead.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

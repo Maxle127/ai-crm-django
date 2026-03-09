@@ -28,12 +28,12 @@
   line-height: 1.5;
 }
 
-.create-wrap {
+.update-wrap {
   max-width: 720px;
   margin: 0 auto;
 }
 
-.create-panel {
+.update-panel {
   padding: 26px;
   border-radius: 20px;
   border: 1px solid var(--border);
@@ -45,7 +45,7 @@
   overflow: hidden;
 }
 
-.create-panel::before {
+.update-panel::before {
   content: "";
   position: absolute;
   inset: -120px;
@@ -58,7 +58,7 @@
   pointer-events: none;
 }
 
-.create-panel>* {
+.update-panel>* {
   position: relative;
   z-index: 1;
 }

@@ -1,0 +1,56 @@
+.page-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 30px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.delete-text {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.delete-box {
+    background: #111827;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-danger {
+    background: #ef4444;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #374151;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: #1f2937;
+}

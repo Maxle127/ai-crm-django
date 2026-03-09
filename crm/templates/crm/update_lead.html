@@ -2,25 +2,25 @@
 {% load static %}
 
 {% block page_title %}
-  Create Lead
+  Update Lead
 {% endblock %}
 
 {% block css_files %}
-  <link rel="stylesheet" href="{% static 'crm/create-lead.css' %}?v=5" />
+  <link rel="stylesheet" href="{% static 'crm/update-lead.css' %}" />
 {% endblock %}
 
 {% block content %}
   <div class="page-container">
     <div class="page-header">
       <div>
-        <h1 class="page-title">Create Lead</h1>
-        <p class="page-subtitle">Fill in the form to create a new lead</p>
+        <h1 class="page-title">Update Lead</h1>
+        <p class="page-subtitle">Update in the form to create a new lead</p>
       </div>
     </div>
 
-    <div class="create-wrap">
-      <div class="panel create-panel">
-        <form method="POST" action="{% url 'create' %}" class="lead-form">
+    <div class="update-wrap">
+      <div class="panel update-panel">
+        <form method="POST" action="{% url 'update' lead.id %}" class="lead-form">
           {% csrf_token %}
 
           <div class="form-grid">
@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </form>
       </div>
     </div>
