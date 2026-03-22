@@ -25,6 +25,7 @@ class Lead(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    attachment = models.FileField(upload_to="attachments/", null=True, blank=True)
     class Meta:
         ordering = ["-created_at"]
 

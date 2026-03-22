@@ -184,3 +184,29 @@ select option {
   background: #0f172a;
   color: white;
 }
+
+input[type="file"]{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: var(--muted);
+  font: inherit;
+  box-sizing: border-box;
+}
+
+input[type="file"]::file-selector-button{
+  margin-right: 12px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover{
+  background: rgba(255,255,255,0.16);
+}

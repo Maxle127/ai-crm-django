@@ -98,3 +98,48 @@
 .create-btn:active{
   transform: translateY(0px);
 }
+.status-filter-form{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.status-filter-form select{
+  min-width: 180px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font: inherit;
+}
+
+.status-filter-form button{
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status-filter-form button:hover{
+  background: rgba(255,255,255,0.14);
+}
+
+.empty-state{
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+  color: var(--muted);
+}
+
+.status-filter-form select option{
+  background: #1f2a44;
+  color: #ffffff;
+}

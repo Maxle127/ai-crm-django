@@ -6,7 +6,7 @@ All leads
 {% endblock %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'crm/leads.css' %}?v=4" />
+    <link rel="stylesheet" href="{% static 'crm/leads.css' %}?v=5" />
 {% endblock %}
 
 {% block content %}
@@ -18,11 +18,27 @@ All leads
             <p class="page-subtitle">A simple overview of your pipeline.</p>
             <a href ="{% url 'create' %}"  class="create-btn"> Create Lead </a>
         </div>
+            <form method="POST" class="status-filter-form">
+            {% csrf_token %}
+                <select name="status_filter">
+                    <option value="all" {% if status_filter == "all" %}selected{% endif %}>All</option>
+                    <option value="new" {% if status_filter == "new" %}selected{% endif %}>New</option>
+                    <option value="contacted" {% if status_filter == "contacted" %}selected{% endif %}>Contacted</option>
+                    <option value="won" {% if status_filter == "won" %}selected{% endif %}>Won</option>
+                    <option value="lost" {% if status_filter == "lost" %}selected{% endif %}>Lost</option>
+                </select>
+                <button type="submit">Apply</button>
+            </form>
     </header>
 
-    <div class="leads-list">
+
+        <div class="leads-list">
         {% for lead in leads %}
             {% include "crm/includes/lead-item.html"%}
+            {% empty %}
+            <div class="empty-state">
+                No leads found for this filter.
+            </div>
         {% endfor %}
     </div>
 <section>

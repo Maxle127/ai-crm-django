@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block css_files %}
-  <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=5" />
+  <link rel="stylesheet" href="{% static 'crm/lead-detail.css' %}?v=6" />
 {% endblock %}
 
 {% block content %}
@@ -56,6 +56,13 @@
             <span>Source</span>
             <span>{{ lead.get_source_display }}</span>
           </div>
+
+          {% if lead.attachment %}
+          <div class="lead-attachment">
+            <span class="attachment-label">Attachment</span>
+            <a href="{{ lead.attachment.url }}" class="attachment-link" target="_blank">Open file</a>
+          </div>
+          {% endif %}
         </div>
       </section>
 
