@@ -5,6 +5,7 @@ from .models import Lead, Note
 from django.contrib.auth.decorators import login_required
 from .forms import LeadForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .ai_service import generate_folow_up
 
 
 class LeadCreateView(CreateView):
@@ -76,16 +77,22 @@ def leads(request):
 @login_required
 def lead_detail(request, id):
     lead = get_object_or_404(Lead, id=id, owner=request.user)
+    follow_up_message = None
 
-    if lead == None:
-        raise Http404()
-    
     if request.method == "POST":
         delete_note_id = request.POST.get("delete_note_id")
+        generate_folow_up_action = request.POST.get("generate_follow_up")
 
         if delete_note_id:
             note = get_object_or_404(Note, id=delete_note_id, lead=lead)
             note.delete()
+            
+        elif generate_folow_up_action:    
+            notes_text=""
+            for note in lead.notes.all():
+                notes_text += note.note_text +"\n"
+            follow_up_message = generate_folow_up(lead.first_name, lead.status, lead.source, notes_text)
+
         else:
             note_text = request.POST.get("note_text")
 
@@ -94,4 +101,4 @@ def lead_detail(request, id):
 
             return redirect("lead-detail", id=lead.id)
         
-    return render(request, "crm/lead-detail.html", {"lead": lead})
+    return render(request, "crm/lead-detail.html", {"lead": lead, "follow_up_message": follow_up_message})

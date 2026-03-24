@@ -69,9 +69,20 @@
       <section class="card">
         <div class="notes-head">
           <h2 class="section-title">Notes</h2>
-          <button class="btn btn-primary" type="button">AI: Generate follow-up</button>
+          <form method="POST" class="ai-follow-up-form">
+            {% csrf_token %}
+            <input type="hidden" name="generate_follow_up" value="1">
+            <button class="btn btn-primary" type="submit">AI: Generate follow-up</button>
+          </form>
         </div>
 
+        {% if follow_up_message %}
+        <div class ="ai-follow-up-box">
+          <h3 class="section-title">AI Follow-up</h3>
+          <p class="ai-follow-up-text">{{ follow_up_message}}</p>
+        </div>
+        {% endif %}
+        
         <div class="notes">
           {% for note in lead.notes.all %}
             <div class="note">

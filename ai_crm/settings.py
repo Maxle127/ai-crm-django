@@ -76,9 +76,13 @@ WSGI_APPLICATION = 'ai_crm.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "ai_crm_db",
+        "USER": "postgres",
+        "PASSWORD": "Ao2557an",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
