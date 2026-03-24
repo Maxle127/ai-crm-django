@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Home
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'crm/home.css' %}?v=2" />
+{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">AI-powered CRM</p>
+      <h1 class="hero-title">Manage leads, notes, and follow-ups in one place</h1>
+      <p class="hero-text">
+        A simple CRM built with Django, PostgreSQL, file uploads, sessions, and AI follow-up generation.
+      </p>
+
+      <div class="hero-actions">
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}" class="btn btn-ghost">Go to Dashboard</a>
+          <a href="{% url 'leads' %}" class="btn btn-ghost">View Leads</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="home-grid">
+      <div class="home-card">
+        <h3>Lead Management</h3>
+        <p>Create, update, delete, and track leads in one clean workflow.</p>
+      </div>
+
+      <div class="home-card">
+        <h3>Notes & Files</h3>
+        <p>Add notes, upload attachments, and keep all lead context together.</p>
+      </div>
+
+      <div class="home-card">
+        <h3>AI Follow-up</h3>
+        <p>Generate a professional follow-up message directly from the lead detail page.</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

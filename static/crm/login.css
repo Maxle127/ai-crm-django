@@ -1,0 +1,125 @@
+.auth-page{
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-card{
+  width: 100%;
+  max-width: 460px;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.auth-head{
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.auth-kicker{
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-title{
+  margin: 0 0 10px;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.auth-subtitle{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label{
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-group input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus{
+  border-color: rgba(99,102,241,0.35);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.14);
+}
+
+.auth-submit-btn{
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(99,102,241,0.35);
+  background: linear-gradient(180deg, rgba(99,102,241,0.28), rgba(79,70,229,0.22));
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 24px rgba(79,70,229,0.18);
+}
+
+.auth-submit-btn:hover{
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, rgba(99,102,241,0.35), rgba(79,70,229,0.28));
+  border-color: rgba(99,102,241,0.45);
+}
+
+.form-errors,
+.field-error{
+  color: #fca5a5;
+  font-size: 13px;
+}
+
+.form-errors ul,
+.field-error ul{
+  margin: 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 640px){
+  .auth-card{
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .auth-title{
+    font-size: 28px;
+  }
+}

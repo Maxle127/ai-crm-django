@@ -49,16 +49,30 @@ body {
   letter-spacing: .3px;
 }
 
-.nav-links a {
+.nav-links a,
+.nav-link-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
   color: var(--muted);
   text-decoration: none;
   margin-left: 14px;
   padding: 8px 10px;
   border-radius: 10px;
   transition: 0.2s;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.nav-links a:hover {
-  color: var(--text);
-  background: rgba(255,255,255,0.06);
+.auth-links{
+  display: flex;
+  align-items: center;
+}
+
+.logout-form{
+  margin: 0;
 }

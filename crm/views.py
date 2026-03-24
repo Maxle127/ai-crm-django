@@ -1,11 +1,13 @@
 from django.urls import reverse_lazy
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Lead, Note
+from .models import Lead, Note, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import LeadForm
+from .forms import LeadForm, ProfileForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .ai_service import generate_folow_up
+from datetime import date
+import json
 
 
 class LeadCreateView(CreateView):
@@ -102,3 +104,77 @@ def lead_detail(request, id):
             return redirect("lead-detail", id=lead.id)
         
     return render(request, "crm/lead-detail.html", {"lead": lead, "follow_up_message": follow_up_message})
+
+
+
+def home(request):
+    return render(request, "crm/home.html" )
+
+
+@login_required
+def profile(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+        
+    else:
+        form = ProfileForm(instance=profile)
+        
+    my_leads = Lead.objects.filter(owner=request.user)
+
+    total = my_leads.count()
+    new_count = my_leads.filter(status="new").count()
+    contacted_count = my_leads.filter(status="contacted").count()
+    won_count = my_leads.filter(status="won").count()
+    lost_count = my_leads.filter(status="lost").count()
+    
+    today = date.today()
+    current_month = today.month
+    current_year = today.year
+    
+    monthly_leads = my_leads.filter(
+        created_at__year=current_year,
+        created_at__month=current_month
+    )
+    labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+    
+    new_chart = [0, 0, 0, 0, 0]
+    contacted_chart = [0, 0, 0, 0, 0]
+    won_chart = [0, 0, 0, 0, 0]
+    lost_chart = [0, 0, 0, 0, 0]
+    
+    for lead in monthly_leads:
+        day = lead.created_at.day
+        week_index = (day - 1) //  7
+        
+        if lead.status == "new":
+            new_chart[week_index] += 1
+        if lead.status == "contacted":
+            contacted_chart[week_index] += 1
+        if lead.status == "won":
+            won_chart[week_index] += 1
+        if lead.status == "lost":
+            lost_chart[week_index] += 1
+    
+    context = {
+        "profile": profile,
+        "form": form,
+        "total_leads": total,
+        "new_leads": new_count,
+        "contacted_leads": contacted_count,
+        "won_leads": won_count,
+        "lost_leads": lost_count,
+        "chart_labels": json.dumps(labels),
+        "new_chart": json.dumps(new_chart),
+        "contacted_chart": json.dumps(contacted_chart),
+        "won_chart": json.dumps(won_chart),
+        "lost_chart": json.dumps(lost_chart),
+    }
+    
+    
+    return render(request, "crm/profile.html", context)

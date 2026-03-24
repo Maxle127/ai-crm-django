@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+  Profile
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'crm/profile.css' %}?v=3" />
+{% endblock %}
+
+{% block content %}
+  <div class="page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <span>/</span>
+        <span class="crumb-current">Profile</span>
+      </div>
+
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Profile</h1>
+          <p class="page-subtitle">Manager profile and personal statistics.</p>
+        </div>
+      </header>
+
+      <section class="card profile-card">
+        <div class="profile-top">
+          <div class="profile-avatar">
+            {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}"alt="Avatar" class="profile-avatar-img">
+            {% else %}
+            <span>{{ user.username|slice:":1"|upper }}</span>
+            {% endif %}
+          </div>
+
+          <div class="profile-info">
+            <h2 class="profile-name">{{ user.username }}</h2>
+            <p class="profile-email">{{ user.email }}</p>
+          </div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="avatar-form">
+            {% csrf_token %}
+            {{ form.avatar }}
+            <button type="submit" class="avatar-save-btn">Save avatar</button>
+        </form>
+      </section>
+
+      <section class="card profile-stats">
+        <h2 class="section-title">Statistics</h2>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Total leads</span>
+            <span class="stat-value">{{ total_leads }}</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">New leads</span>
+            <span class="stat-value">{{ new_leads }}</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Contacted</span>
+            <span class="stat-value">{{ contacted_leads }}</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Won leads</span>
+            <span class="stat-value">{{ won_leads }}</span>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-label">Lost leads</span>
+            <span class="stat-value">{{ lost_leads }}</span>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="card profile-chart">
+        <h2 class="section-title">Monthly activity</h2>
+        <div class="chart-placeholder">
+            <canvas id="leadsChart"></canvas>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+  const ctx = document.getElementById("leadsChart");
+
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: {{ chart_labels|safe }},
+      datasets: [
+        {
+          label: "New",
+          data: {{ new_chart|safe }},
+          tension: 0.3,
+        },
+        {
+          label: "Contacted",
+          data: {{ contacted_chart|safe }},
+          tension: 0.3,
+        },
+        {
+          label: "Won",
+          data: {{ won_chart|safe }},
+          tension: 0.3,
+        },
+        {
+          label: "Lost",
+          data: {{ lost_chart|safe }},
+          tension: 0.3,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#e5e7eb"
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#e5e7eb"
+          },
+          grid: {
+            color: "rgba(255,255,255,0.08)"
+          }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: "#e5e7eb"
+          },
+          grid: {
+            color: "rgba(255,255,255,0.08)"
+          }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

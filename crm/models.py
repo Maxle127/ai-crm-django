@@ -40,3 +40,8 @@ class Note(models.Model):
 
     def __str__(self):
         return f"Note for {self.lead} at {self.created_at}"
+    
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
