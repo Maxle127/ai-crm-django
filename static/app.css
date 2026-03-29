@@ -8,26 +8,47 @@
 
 * { box-sizing: border-box;}
 
+html {
+  height: 100%;
+}
+
 body {
     margin: 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,  sans-serif;
-    background: 
-        radial-gradient(1200px 800px at 15% 10%, rgba(59, 130, 246, 0.25), transparent 60%), 
-        radial-gradient(900px 600px at 90% 20%, rgba(168, 85, 247, 0.20), transparent 55%), 
-        var(--bg);
-    color: var(--text)
+    background: var(--bg);
+    background-repeat: no-repeat;
+    color: var(--text);
+    min-height: 100vh;
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(1000px 700px at 12% 8%, rgba(59, 130, 246, 0.18), transparent 60%),
+        radial-gradient(800px 600px at 88% 12%, rgba(168, 85, 247, 0.14), transparent 58%),
+        radial-gradient(1200px 900px at 50% 100%, rgba(59, 130, 246, 0.08), transparent 68%);
+    background-repeat: no-repeat;
+}
 .dashboard-container {
     max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 24px;
+    margin: 0 auto;
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 32px;
 }
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  left: 0;
+  right: 0;
   backdrop-filter: blur(10px);
   background: rgba(10, 14, 30, 0.45);
   border-bottom: 1px solid var(--border);
@@ -75,4 +96,10 @@ body {
 
 .logout-form{
   margin: 0;
+}
+
+.page-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
 }

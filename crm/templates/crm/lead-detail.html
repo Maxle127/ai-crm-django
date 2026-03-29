@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="page">
+  <div class="page-shell">
     <div class="container">
       <div class="breadcrumb">
         <a href="{% url 'dashboard' %}">Dashboard</a>
@@ -28,8 +28,8 @@
         </div>
 
         <div class="page-actions">
-          <a href="{% url 'update' lead.id %}" class="btn btn-primary">Edit</a>
-          <a href="{% url 'delete' lead.id %}" class="btn btn-primary">Delete</a>
+          <a href="{% url 'update' lead.id %}" class="btn btn-secondary">Edit</a>
+          <a href="{% url 'delete' lead.id %}" class="btn btn-danger">Delete</a>
         </div>
       </header>
 

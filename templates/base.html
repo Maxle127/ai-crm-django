@@ -10,7 +10,7 @@
 
       {% endblock %}
     </title>
-    <link rel="stylesheet" href="{% static 'app.css' %}?v=4" />
+    <link rel="stylesheet" href="{% static 'app.css' %}?v=9" />
     {% block css_files %}
 
     {% endblock %}
@@ -33,7 +33,7 @@
               <button type="submit" class="nav-link-btn">Logout</button>
             </form>
           {% else %}
-            <a href="{% url 'login' %}" class="nav-btn">Login</a>
+            <a href="{% url 'login' %}" class="nav-link-btn">Login</a>
           {% endif %}
         </div>
       </div>

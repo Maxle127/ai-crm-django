@@ -1,57 +1,53 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block page_title %}
-AI CRM Dashboard
+  AI CRM Dashboard
 {% endblock %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'crm/index.css' %}?v=2" />
+  <link rel="stylesheet" href="{% static 'crm/index.css' %}?v=2" />
 {% endblock %}
 
 {% block content %}
-<div class="dashboard-container">
+  <div class="dashboard-container">
     <h1 class="dashboard-title">AI CRM Dashboard</h1>
-    <p class="dashboard-subtitle">
-        Track your leads and manage your sales pipeline efficiently
-    </p>
+    <p class="dashboard-subtitle">Track your leads and manage your sales pipeline efficiently</p>
 
     <div class="stats-section">
-        <div class="stat-card">
-            <h3>Total Leads</h3>
-            <p>{{ total }}</p>
-        </div>
+      <div class="stat-card">
+        <h3>Total Leads</h3>
+        <p>{{ total }}</p>
+      </div>
 
-        <div class="stat-card">
-            <h3>New</h3>
-            <p>{{ new_count }}</p>
-        </div>
+      <div class="stat-card">
+        <h3>New</h3>
+        <p>{{ new_count }}</p>
+      </div>
 
-        <div class="stat-card">
-            <h3>In Progress</h3>
-            <p>{{ contacted_count }}</p>
-        </div>
+      <div class="stat-card">
+        <h3>In Progress</h3>
+        <p>{{ contacted_count }}</p>
+      </div>
 
-        <div class="stat-card">
-            <h3>Closed</h3>
-            <p>{{ won_count }}</p>
-        </div>
+      <div class="stat-card">
+        <h3>Closed</h3>
+        <p>{{ won_count }}</p>
+      </div>
     </div>
 
     <div class="recent-section">
-        <div class="recent-section">
-            <h2>Recent Leads</h2>
-            <a class="recent-link" href="/leads/">View all</a>
-        </div>
+      <h2>Recent Leads</h2>
+      <a class="recent-link" href="/leads/">View all</a>
     </div>
 
     <div class="recent-list">
-        {% for lead in leads %}
-            <div class="lead-row">
-                <div class="lead-name">{{ lead.first_name }} {{ lead.last_name }}</div>
-                <div class="lead-status status-new">{{ lead.get_status_display }}</div>
-            </div>
-        {% endfor %}
+      {% for lead in leads %}
+        <div class="lead-row">
+          <div class="lead-name">{{ lead.first_name }} {{ lead.last_name }}</div>
+          <div class="lead-status status-new">{{ lead.get_status_display }}</div>
+        </div>
+      {% endfor %}
     </div>
-</div>
+  </div>
 {% endblock %}

@@ -1,13 +1,17 @@
 from django.urls import reverse_lazy
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Lead, Note, Profile
 from django.contrib.auth.decorators import login_required
-from .forms import LeadForm, ProfileForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .ai_service import generate_folow_up
+
 from datetime import date
 import json
+
+from .models import Lead, Note, Profile
+from .forms import LeadForm, ProfileForm, RegisterForm
+from .ai_service import generate_folow_up
 
 
 class LeadCreateView(CreateView):
@@ -38,6 +42,19 @@ class LeadDeleteView(DeleteView):
     model = Lead
     template_name = "crm/delete_lead.html"
     success_url = reverse_lazy("leads")
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("dashboard")
+    else:
+        form = RegisterForm()
+
+    return render(request, "registration/register.html", {"form": form})
     
  
 @login_required
@@ -60,6 +77,7 @@ def dashbord(request):
     }
     return render(request, "crm/index.html", context)
 
+
 @login_required
 def leads(request):
     if request.method == "POST":
@@ -75,6 +93,7 @@ def leads(request):
         "status_filter": status_filter
     }
     return render(request, "crm/leads.html", context)
+
 
 @login_required
 def lead_detail(request, id):
@@ -104,7 +123,6 @@ def lead_detail(request, id):
             return redirect("lead-detail", id=lead.id)
         
     return render(request, "crm/lead-detail.html", {"lead": lead, "follow_up_message": follow_up_message})
-
 
 
 def home(request):
@@ -178,3 +196,5 @@ def profile(request):
     
     
     return render(request, "crm/profile.html", context)
+
+
