@@ -1,0 +1,9 @@
+Django==6.0.4
+openai==2.30.0
+Pillow
+psycopg2-binary
+python-dotenv
+dj-database-url
+whitenoise[brotli]
+gunicorn
+uvicorn
