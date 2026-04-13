@@ -1,18 +1,32 @@
-from openai import OpenAI 
-client = OpenAI()
+from openai import OpenAI
+import os
 
-def generate_folow_up(first_name, status, source, notes):
+
+def generate_follow_up(lead):
+    api_key = os.environ.get("OPENAI_API_KEY")
+
+    if not api_key:
+        return "OpenAI API key is not configured."
+
+    client = OpenAI(api_key=api_key)
+
     prompt = f"""
-    Generate a short professional follow-up message for a sales lead.
-    Lead name: {first_name}
-    Status: {status}
-    Source: {source}
-    Notes: {notes}
-    Write a polite message  in English, 3-5 sentences, friendly but professional
+    Write a short professional follow-up message for this lead.
+
+    Name: {lead.first_name} {lead.last_name}
+    Email: {lead.email}
+    Phone: {lead.phone}
+    Source: {lead.get_source_display()}
+    Status: {lead.get_status_display()}
     """
-    response = client.responses.create(
-        model = "gpt-5-mini",
-        input=prompt,
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You write short professional sales follow-up messages."},
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.7,
     )
-    return(response.output_text)
- 
+
+    return response.choices[0].message.content.strip()
