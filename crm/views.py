@@ -11,7 +11,7 @@ import json
 
 from .models import Lead, Note, Profile
 from .forms import LeadForm, ProfileForm, RegisterForm
-from .ai_service import generate_folow_up
+from .ai_service import generate_follow_up
 
 
 class LeadCreateView(CreateView):
@@ -102,17 +102,17 @@ def lead_detail(request, id):
 
     if request.method == "POST":
         delete_note_id = request.POST.get("delete_note_id")
-        generate_folow_up_action = request.POST.get("generate_follow_up")
+        generate_follow_up_action = request.POST.get("generate_follow_up")
 
         if delete_note_id:
             note = get_object_or_404(Note, id=delete_note_id, lead=lead)
             note.delete()
             
-        elif generate_folow_up_action:    
+        elif generate_follow_up_action:    
             notes_text=""
             for note in lead.notes.all():
                 notes_text += note.note_text +"\n"
-            follow_up_message = generate_folow_up(lead.first_name, lead.status, lead.source, notes_text)
+            follow_up_message = generate_follow_up(lead.first_name, lead.status, lead.source, notes_text)
 
         else:
             note_text = request.POST.get("note_text")
