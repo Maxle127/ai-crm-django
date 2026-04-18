@@ -28,11 +28,17 @@
         <div class="form-group">
           <label>Username</label>
           {{ form.username }}
+          {% for error in form.username.errors %}
+            <p class="field-error">{{ error }}</p>
+          {% endfor %}
         </div>
 
         <div class="form-group">
           <label>Email</label>
           {{ form.email }}
+          {% for error in form.email.errors %}
+            <p class="field-error">{{ error }}</p>
+          {% endfor %}
         </div>
 
         <div class="form-group">
@@ -83,8 +89,8 @@
 
         <button type="submit" class="auth-submit-btn">Create account</button>
         <p class="auth-switch">
-            Already have an account?
-        <a href="{% url 'login' %}">Log in</a>
+          Already have an account?
+          <a href="{% url 'login' %}">Log in</a>
         </p>
       </form>
     </div>

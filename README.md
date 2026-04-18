@@ -83,6 +83,9 @@ python manage.py runserver
 
 ## Live Demo
 Live demo: https://ai-crm-django.onrender.com/
+Create your account or use this one:
+Username: Makslayyy
+Password: Ao2557an
 
 ## Deployment Notes
 The project is deployed on Render and uses Render PostgreSQL as the production database. Because it uses the free plan, the server may need a few seconds to wake up after inactivity.
